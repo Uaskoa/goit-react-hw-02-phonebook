@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Filter from './components/Filter'
 import ContactForm from './components/ContactForm'
+import ContactList from'./components/ContactList'
 import shortId from 'shortid';
 
 class App extends Component {
@@ -53,8 +54,7 @@ class App extends Component {
   }
 
   render() {
-    // const normalizedFilter=this.state.filter.toLowerCase()
-     const filteredContacts = this.getFilteredContacts()
+         const filteredContacts = this.getFilteredContacts()
 
     console.log(filteredContacts);
     return (
@@ -62,19 +62,12 @@ class App extends Component {
         <h1>Phonebook</h1>
 
         <ContactForm onSubmit={this.formSubmitHandler} />
-        
+
         <h2>Contacts</h2>
-        
 
         <Filter value={this.state.filter} onChange={this.handleSearchChange} />
-
-        <ul>
-          {filteredContacts.map(contact => (
-            <li id={this.inputId}>
-              {contact.name} {contact.number}
-            </li>
-          ))}
-        </ul>
+        <ContactList contacts={filteredContacts}/>
+    
       </div>
     );
   }
