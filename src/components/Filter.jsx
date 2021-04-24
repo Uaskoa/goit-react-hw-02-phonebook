@@ -1,5 +1,8 @@
 const Filter = ({ value, onChange }) => (
-  <input type="text" value={value} name="filter" onChange={onChange}></input>
+  <>
+    <h3>Find contacts by name</h3>
+        <input type="text" value={value} name="filter" onChange={onChange}></input>
+         </>
 );
 
 export default Filter;
