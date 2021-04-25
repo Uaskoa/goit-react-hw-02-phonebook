@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import shortId from 'shortid';
+import './ContactForm.scss'
 
 class ContactForm extends Component {
   state = {
@@ -32,11 +33,11 @@ class ContactForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor={this.nameInputId}>
-          {' '}
-          Name
+      <form className="form" onSubmit={this.handleSubmit}>
+        <label className="form-label" htmlFor={this.nameInputId}>
+          <span className="form-label-title">Name</span>
           <input
+            className="form-input"
             type="text"
             id={this.nameInputId}
             value={this.state.name}
@@ -47,9 +48,10 @@ class ContactForm extends Component {
             required
           />
         </label>
-        <label htmlFor={this.phoneInputId}>
-          Number
+        <label className="form-label" htmlFor={this.phoneInputId}>
+          <span className="form-label-title">Number</span>
           <input
+            className="form-input"
             type="tel"
             id={this.phoneInputId}
             value={this.state.number}
@@ -59,7 +61,9 @@ class ContactForm extends Component {
             title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
             required
           />
-          <button type="submit">Add contact</button>
+          <button className="form-button" type="submit">
+            Add contact
+          </button>
         </label>
       </form>
     );

@@ -1,8 +1,10 @@
 import { Component } from 'react';
-import Filter from './components/Filter'
-import ContactForm from './components/ContactForm'
-import ContactList from'./components/ContactList'
+import Filter from './components/Filter';
+import ContactForm from './components/ContactForm/ContactForm';
+import ContactList from './components/ContactList';
 import shortId from 'shortid';
+import './styles.css';
+import "./App.scss"
 
 class App extends Component {
   state = {
@@ -13,18 +15,15 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-   };
-
-
+  };
 
   handleSearchChange = event => {
-     this.setState({ filter: event.currentTarget.value });
-  }
+    this.setState({ filter: event.currentTarget.value });
+  };
 
   formSubmitHandler = data => {
-    console.log(data);
-    
     const { name, number } = data;
+
     this.setState(prevState => ({
       contacts: [
         ...prevState.contacts,
@@ -33,41 +32,54 @@ class App extends Component {
     }));
 
     // /   /через concat
-// this.setState({
-//   contacts: contacts.concat({ id: shortId.generate(), name, number }),
-// });
-
-       
-  }
-
-
+    // this.setState({
+    //   contacts: contacts.concat({ id: shortId.generate(), name, number }),
+    // });
+  };
 
   getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
 
-    const { contacts, filter} = this.state
-      const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
+  };
 
-      return contacts.filter(contact =>
-        contact.name.toLowerCase().includes(normalizedFilter),
-      );
-    
-  }
+  deleteContact = contactId => {
+    console.log(contactId);
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+    console.log('delete');
+
+    console.log(contactId);
+  };
 
   render() {
-         const filteredContacts = this.getFilteredContacts()
+    const filteredContacts = this.getFilteredContacts();
 
     console.log(filteredContacts);
     return (
       <div className="App">
-        <h1>Phonebook</h1>
+        <div className="container">
+          <div className="phonebook">
+            <h1>Phonebook</h1>
 
-        <ContactForm onSubmit={this.formSubmitHandler} />
+            <ContactForm onSubmit={this.formSubmitHandler} />
+          </div>
 
-        <h2>Contacts</h2>
+          <h2>Contacts</h2>
 
-        <Filter value={this.state.filter} onChange={this.handleSearchChange} />
-        <ContactList contacts={filteredContacts}/>
-    
+          <Filter
+            value={this.state.filter}
+            onChange={this.handleSearchChange}
+          />
+          <ContactList
+            contacts={filteredContacts}
+            onDeleteContact={this.deleteContact}
+          />
+        </div>
       </div>
     );
   }

@@ -1,0 +1,18 @@
+.form {
+
+    &-label {
+
+        &-title {
+           font-size: 14px;
+           font-weight: bold;
+           
+        }
+
+         display: block;
+    }
+    &-input {
+        display: block;
+        margin-bottom: 10px;
+        height: 30px;
+}
+}
