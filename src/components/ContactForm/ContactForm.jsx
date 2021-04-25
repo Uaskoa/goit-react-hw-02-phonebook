@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import shortId from 'shortid';
-import './ContactForm.scss'
+import './ContactForm.scss';
+import PropTypes from 'prop-types';
 
 class ContactForm extends Component {
   state = {
@@ -37,7 +38,7 @@ class ContactForm extends Component {
         <label className="form-label" htmlFor={this.nameInputId}>
           <span className="form-label-title">Name</span>
           <input
-            className="form-input"
+            className="input"
             type="text"
             id={this.nameInputId}
             value={this.state.name}
@@ -51,7 +52,7 @@ class ContactForm extends Component {
         <label className="form-label" htmlFor={this.phoneInputId}>
           <span className="form-label-title">Number</span>
           <input
-            className="form-input"
+            className="input"
             type="tel"
             id={this.phoneInputId}
             value={this.state.number}
@@ -61,7 +62,7 @@ class ContactForm extends Component {
             title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
             required
           />
-          <button className="form-button" type="submit">
+          <button className="form-button button" type="submit">
             Add contact
           </button>
         </label>
@@ -69,5 +70,9 @@ class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default ContactForm;
