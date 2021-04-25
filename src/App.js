@@ -18,9 +18,8 @@ class App extends Component {
 
   formSubmitHandler = data => {
     const { name, number } = data;
-
     const normalizedName = name.toLowerCase();
-    console.log(name);
+   
 
     if (
       this.state.contacts.filter(
