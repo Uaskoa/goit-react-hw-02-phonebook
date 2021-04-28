@@ -19,12 +19,19 @@ class App extends Component {
   formSubmitHandler = data => {
     const { name, number } = data;
     const normalizedName = name.toLowerCase();
-   
+
+    // if (
+    //   this.state.contacts.filter(
+    //     contact => contact.name.toLowerCase() === normalizedName,
+    //   ).length > 0
+    // ) {
+    //   return alert(`${name} is already in contacts.`);
+    // }
 
     if (
-      this.state.contacts.filter(
-        contact => contact.name.toLowerCase() === normalizedName,
-      ).length > 0
+      this.state.contacts.find(
+        ({ name }) => name.toLowerCase() === normalizedName,
+      )
     ) {
       return alert(`${name} is already in contacts.`);
     }
